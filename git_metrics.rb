@@ -33,7 +33,10 @@ def num_developers(lines)
   developer_count = Array.new
   lines.each do |line|
     if line.start_with?('Author: ')
-      dev = trimFromBeginning(line,8)
+      line_array = line.split('<')
+      # Removes the first element of the array, leaving only the email left
+      line_array.shift
+      dev = line_array[0]
       # If the developer doesn't already exist in the array, add it
       if !developer_count.include?(dev)
         developer_count << dev
@@ -43,7 +46,7 @@ def num_developers(lines)
   developer_count.length
 end
 
-puts num_developers(lines)
+puts num_developers lines
 
 # Given an array of Git log lines, compute the number of days this was in development
 # Note: you cannot assume any order of commits (e.g. you cannot assume that the newest commit is first).
