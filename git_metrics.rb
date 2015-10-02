@@ -48,14 +48,36 @@ puts num_developers(lines)
 # Given an array of Git log lines, compute the number of days this was in development
 # Note: you cannot assume any order of commits (e.g. you cannot assume that the newest commit is first).
 def days_of_development(lines)
-
+  # Initializes the latest date and earliest date variables with extreme values to be used as comparators
+  # So the latest date would start at 1900, since it's guaranteed that every date will be after that
+  # The earliest date would be today, since it's almost guaranteed that every date will be before that.
+  latest_date = Date.new(1900,1,1)
+  earliest_date = Date.today
+  lines.each do |line|
+    if line.start_with?('Date:')
+      dateString = trimFromBeginning(line,8)
+      date = Date.parse(dateString)
+      # If the date comes after the current latest date
+      if date > latest_date
+        latest_date = date
+      # If the date comes before the current earliest date
+      elsif date < earliest_date
+        earliest_date = date
+      end
+    end
+  end
+  days_in_development = (latest_date - earliest_date) + 1
+  days_in_development.to_i
 end
+
+puts days_of_development(lines)
 
 # This is a ruby idiom that allows us to use both unit testing and command line processing
 # Does not get run when we use unit testing, e.g. ruby test_git_metrics.rb
 # These commands will invoke this code with our test data:
 #    ruby git_metrics.rb < ruby-progressbar-short.txt
 #    ruby git_metrics.rb < ruby-progressbar-full.txt
+=begin
 if __FILE__ == $PROGRAM_NAME
   lines = []
   $stdin.each { |line| lines << line }
@@ -63,3 +85,4 @@ if __FILE__ == $PROGRAM_NAME
   puts "Number of developers: #{num_developers lines}"
   puts "Number of days in development: #{days_of_development lines}"
 end
+=end

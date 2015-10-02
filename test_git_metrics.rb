@@ -8,8 +8,8 @@ class TestGitMetrics < Test::Unit::TestCase
   end
 
   def test_dates_with_three_days
-    exp = [ "Date:  Sun Jan 26 21:25:22 2014 -0600", \
-  			"Date:  Sun Jan 23 21:25:22 2014 -0600", \
+    exp = [ "Date:  Sun Jan 26 21:25:22 2014 -0600",
+  			"Date:  Sun Jan 23 21:25:22 2014 -0600",
   			"Date:  Sun Jan 25 21:25:22 2014 -0600"]
     assert_equal 4, days_of_development(exp), "Should have been a 3 days difference"
   end
