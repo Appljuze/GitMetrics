@@ -8,10 +8,6 @@ def trimFromBeginning(string, amount)
 end
 
 # Given an array of git log lines, count the number of commits in the log
-file = File.open('ruby-progressbar-short.txt','r')
-long_file = File.open('ruby-progressbar-full.txt','r')
-lines = Array.new
-long_file.each {|line| lines << line}
 
 def num_commits(lines)
   number_of_commits = 0
@@ -22,8 +18,6 @@ def num_commits(lines)
   end
   number_of_commits
 end
-
-puts num_commits lines
 
 # Given an array of git log lines, count the number of different authors
 #   (Don't double-count!)
@@ -45,8 +39,6 @@ def num_developers(lines)
   end
   developer_count.length
 end
-
-puts num_developers lines
 
 # Given an array of Git log lines, compute the number of days this was in development
 # Note: you cannot assume any order of commits (e.g. you cannot assume that the newest commit is first).
@@ -73,14 +65,12 @@ def days_of_development(lines)
   days_in_development.to_i
 end
 
-puts days_of_development(lines)
-
 # This is a ruby idiom that allows us to use both unit testing and command line processing
 # Does not get run when we use unit testing, e.g. ruby test_git_metrics.rb
 # These commands will invoke this code with our test data:
 #    ruby git_metrics.rb < ruby-progressbar-short.txt
 #    ruby git_metrics.rb < ruby-progressbar-full.txt
-=begin
+
 if __FILE__ == $PROGRAM_NAME
   lines = []
   $stdin.each { |line| lines << line }
@@ -88,4 +78,3 @@ if __FILE__ == $PROGRAM_NAME
   puts "Number of developers: #{num_developers lines}"
   puts "Number of days in development: #{days_of_development lines}"
 end
-=end

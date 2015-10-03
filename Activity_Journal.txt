@@ -1,0 +1,40 @@
+SWEN-250 Activity Reflection
+Ruby - Git Repository Metrics
+
+Name: Kyler Brown
+
+================================================================
+Start
+Estimated Time	4H
+Plan:
+    I plan on starting with num_commits, then num_developers, and finally days_of_development. I chose this order
+    because this is what I assumed would be the level of difficulty, starting with the easiest and finishing with
+    the hardest.
+
+    For num_commits, this is straight forward. I can simply count the number of lines that start with 'commit '.
+
+    For num_developers, I'll count the number of different occurrences of the text after 'Author: '.
+
+    For days_of_development I can create two Dates (using the Date class), one for the most recent date, and another
+    for the date that's the farthest away. Then subtracting them will yield the amount of days in development.
+
+Complete
+Actual Time	3H 30M
+Observations:
+(Lessons learned, problems encountered, obstacles overcome, etc.)
+
+    I had no problems with the num_commits method.
+
+    For num_developers, I originally had the program just count the occurrences of different lines that started with
+    'Author: '. However, when I tested this with the large file, I was getting 34 developers instead of 33. After doing
+    some debugging, I found out that it was because I should've been counting the developers based on their email,
+    instead of their name and email. One of the developers used a different name, but kept the same email, which
+    caused my program to count that as an extra developer. After realizing this, I changed the method so that it would
+    remove the developer's name and then solely rely on the developer's email to determine whether or not to count that
+    person as a developer.
+
+    The days_of_development method took me qutie a while to figure out, because I was making it a bit too complicated
+    at first. Once I wrote it out on paper and thought it through, I was able to design a nice clean way to implement
+    it.
+
+================================================================
